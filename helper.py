@@ -7,6 +7,9 @@ import helper
 
 from datetime import datetime
 from datetime import timedelta
+from scipy.stats import chi2_contingency
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import chi2
 
 def get_postcode_from_gps(coordinates):
     """
@@ -49,6 +52,7 @@ def get_postcode_from_gps(coordinates):
 def plot_class_distribution(column, dataset, x_label, xticks, xtick_labels):
     """
         Plot distribution graph of a 'column' in 'dataset' with percentage label
+        plt.text(x+width/2,
         where x_label is the x-axis name & xticks is the class array [0, 1,...n]
         xtick_labels is its corresponding labels ['A', 'B', 'C'...]
     """
@@ -57,7 +61,7 @@ def plot_class_distribution(column, dataset, x_label, xticks, xtick_labels):
 
     percentages_index = df_agg['perc'].index
 
-    plt.figure(figsize=(8,7))
+    plt.figure(figsize=(7,5))
 
     #create bar
     graph=plt.bar(df_agg[column], df_agg['Frequency'])
@@ -76,3 +80,4 @@ def plot_class_distribution(column, dataset, x_label, xticks, xtick_labels):
 #     plt.title(f'Distribution of Carrier that {x_label} ')
     plt.xticks(xticks, xtick_labels)
     plt.show()
+    
